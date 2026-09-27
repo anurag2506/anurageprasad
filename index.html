@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="Anurag E Prasad">
+<meta property="og:description" content="Machine Learning Engineer. Founding ML Engineer at Mentoroid. IIT Indore and IIT Madras.">
+<title>Anurag E Prasad</title>
+<meta name="description" content="Anurag E Prasad, Machine Learning Engineer. Founding ML Engineer at Mentoroid. IIT Indore and IIT Madras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#0A0A0B;
+    --surface:#111113;
+    --surface-2:#16161A;
+    --line:#232327;
+    --line-2:#303036;
+    --ink:#F3F3F4;
+    --silver:#C9CBD0;
+    --body:#B4B6BC;
+    --muted:#8D9096;
+    --silver-grad:linear-gradient(180deg,#FFFFFF 0%,#D9DBDF 45%,#9EA1A8 100%);
+    --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono:"Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --gutter:clamp(16px,4vw,48px);
+    --maxw:1120px;
+    --navh:64px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(var(--navh) + 16px);background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  ::selection{background:#E6E7EA;color:#0A0A0B}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--silver);outline-offset:3px;border-radius:3px}
+  h1,h2,h3{color:var(--ink);margin:0;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+  p{margin:0}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .silver{background:var(--silver-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* nav */
+  .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(10,10,11,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:24px;min-height:var(--navh)}
+  .brand{font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+  .brand span{color:var(--muted);font-weight:400}
+  .links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .links::-webkit-scrollbar{display:none}
+  .links a{font-size:14.5px;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:6px;white-space:nowrap;transition:color .2s,background .2s}
+  .links a:hover{color:var(--ink)}
+  .links a.active{color:var(--ink);background:var(--surface-2)}
+  @media (max-width:640px){
+    .nav .wrap{flex-wrap:wrap;gap:0;padding-block:10px 6px}
+    .links{margin-left:-12px;width:calc(100% + 12px);padding-top:4px}
+  }
+
+  /* hero */
+  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(210,212,218,.10), transparent 60%),
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/100% 72px;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,transparent 90%);
+    opacity:.55}
+  .hero .wrap{position:relative;padding-block:clamp(64px,10vw,120px) clamp(56px,8vw,88px)}
+  .avail{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--silver);background:var(--surface)}
+  .avail i{width:7px;height:7px;border-radius:50%;background:var(--silver);box-shadow:0 0 0 3px rgba(201,203,208,.18)}
+  .hero h1{font-size:clamp(2.9rem,8vw,5.6rem);line-height:1;letter-spacing:-.045em;margin-top:26px;font-weight:600}
+  .hero .role{font-size:clamp(1.25rem,2.6vw,1.7rem);color:var(--silver);margin-top:14px;font-weight:500;letter-spacing:-.015em}
+  .hero .intro{max-width:60ch;margin-top:22px;font-size:1.1rem;line-height:1.7}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+  .facts li{font-size:14.5px;color:var(--silver);padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:8px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--line-2);color:var(--ink);background:var(--surface);cursor:pointer;font-family:inherit;transition:border-color .2s,background .2s,transform .2s}
+  .btn:hover{border-color:#5A5C63;transform:translateY(-1px)}
+  .btn.primary{background:linear-gradient(180deg,#F4F4F5,#C9CBD0);color:#0A0A0B;border-color:#DADBDF}
+  .btn.primary:hover{background:linear-gradient(180deg,#FFFFFF,#D6D8DC)}
+  .btn svg{width:16px;height:16px;flex:none}
+
+  /* sections */
+  section{padding-block:clamp(64px,9vw,104px);border-bottom:1px solid var(--line)}
+  .head{display:flex;flex-direction:column;gap:10px;margin-bottom:clamp(32px,5vw,52px);max-width:62ch}
+  .head h2{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.1}
+  .head p{font-size:1.05rem}
+
+  /* timeline */
+  .timeline{list-style:none;margin:0;padding:0;position:relative}
+  .timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--silver),var(--line-2) 30%,var(--line))}
+  .job{position:relative;display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px 40px;padding:0 0 48px 44px}
+  .job:last-child{padding-bottom:0}
+  .job::before{content:"";position:absolute;left:0;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:1px solid var(--muted)}
+  .job.now::before{background:var(--silver);border-color:var(--silver);box-shadow:0 0 0 4px rgba(201,203,208,.14)}
+  .when{display:flex;flex-direction:column;gap:6px}
+  .when .dates{font-family:var(--mono);font-size:13.5px;color:var(--silver);font-variant-numeric:tabular-nums}
+  .when .where{font-size:14px;color:var(--muted)}
+  .pill{align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid var(--line-2);color:var(--silver)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:clamp(20px,3vw,28px)}
+  .card-top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 20px}
+  .card h3{font-size:1.35rem;line-height:1.25}
+  .card .title{color:var(--silver);font-size:15.5px;margin-top:4px}
+  .site{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink);text-decoration:none;padding:6px 11px;border:1px solid var(--line-2);border-radius:6px;white-space:nowrap;transition:border-color .2s,background .2s}
+  .site:hover{border-color:#5A5C63;background:var(--surface-2)}
+  .site svg{width:13px;height:13px}
+  .card ul.pts{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .card ul.pts li{position:relative;padding-left:20px;line-height:1.6}
+  .card ul.pts li::before{content:"";position:absolute;left:2px;top:.72em;width:8px;height:1px;background:var(--muted)}
+  .card ul.pts b{color:var(--ink);font-weight:500}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0;list-style:none}
+  .tags li{font-family:var(--mono);font-size:12px;color:var(--silver);padding:3px 9px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line)}
+  @media (max-width:760px){
+    .job{grid-template-columns:1fr;padding-left:34px;padding-bottom:40px}
+    .when{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 12px}
+  }
+
+  /* publication */
+  .pub{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:start}
+  .pub .card h3{font-size:clamp(1.35rem,2.6vw,1.75rem);line-height:1.25}
+  .pub .venue{margin-top:12px;color:var(--silver)}
+  .pub .abs{margin-top:16px}
+  .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .metrics div{background:var(--surface);padding:20px}
+  .metrics strong{display:block;color:var(--ink);font-size:1.6rem;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
+  .metrics span{font-size:14px;line-height:1.45;display:block;margin-top:4px}
+  @media (max-width:860px){.pub{grid-template-columns:1fr}}
+
+  /* projects */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+  .filters button{font-family:inherit;font-size:14px;color:var(--muted);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:7px 14px;cursor:pointer;transition:all .2s}
+  .filters button:hover{color:var(--ink)}
+  .filters button[aria-pressed="true"]{color:#0A0A0B;background:var(--silver);border-color:var(--silver)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}}
+  .proj{display:flex;flex-direction:column}
+  .proj .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;align-items:baseline}
+  .proj .ctx{font-size:14px;color:var(--silver)}
+  .proj .dates{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+  .proj h3{font-size:1.2rem;margin-top:12px;line-height:1.3}
+  .proj p.desc{margin-top:10px;font-size:15.5px}
+  .proj .result{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:14.5px;color:var(--silver)}
+  .proj .result b{color:var(--ink);font-weight:500}
+  .proj .tags{margin-top:auto;padding-top:16px}
+  .award{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--silver);color:#0A0A0B;margin-left:6px;vertical-align:2px}
+  .more{margin-top:28px;display:flex;justify-content:flex-start}
+
+  /* two col lists */
+  .rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .rows .t{color:var(--ink);font-weight:500;font-size:1.05rem}
+  .rows .s{font-size:15px;margin-top:2px}
+  .rows .y{font-family:var(--mono);font-size:13.5px;color:var(--silver);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,6vw,72px)}
+  @media (max-width:860px){.split{grid-template-columns:1fr}}
+  .split h2{font-size:clamp(1.6rem,3vw,2rem);margin:10px 0 22px}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:200px minmax(0,1fr);border-top:1px solid var(--line)}
+  .skills dt,.skills dd{padding:18px 0;border-bottom:1px solid var(--line);margin:0}
+  .skills dt{color:var(--ink);font-weight:500}
+  .skills dd{display:flex;flex-wrap:wrap;gap:6px}
+  .skills dd span{font-size:14px;color:var(--silver);padding:4px 10px;border-radius:5px;background:var(--surface);border:1px solid var(--line)}
+  @media (max-width:640px){
+    .skills{grid-template-columns:1fr}
+    .skills dt{border-bottom:0;padding-bottom:8px}
+    .skills dd{padding-top:0}
+  }
+
+  /* contact */
+  .contact{border-bottom:0}
+  .contact h2{font-size:clamp(2.2rem,5.4vw,3.6rem);line-height:1.05;letter-spacing:-.035em}
+  .contact p.sub{margin-top:16px;max-width:56ch;font-size:1.08rem}
+  .mailbox{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:16px 16px 16px 20px;border:1px solid var(--line-2);border-radius:12px;background:var(--surface);max-width:100%;width:fit-content}
+  .mailbox .addr{font-size:clamp(1.05rem,2.6vw,1.35rem);color:var(--ink);font-weight:500;user-select:all;word-break:break-all}
+  .copied{font-size:13.5px;color:var(--silver);min-width:1ch}
+  .elsewhere{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  footer{border-top:1px solid var(--line);padding-block:26px 34px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted)}
+  footer a{color:var(--silver);text-decoration:none}
+
+  @media (prefers-reduced-motion: no-preference){
+    .fade{animation:fade .7s cubic-bezier(.2,.7,.2,1) both}
+    .fade.d1{animation-delay:.06s}.fade.d2{animation-delay:.12s}.fade.d3{animation-delay:.18s}.fade.d4{animation-delay:.24s}
+    @keyframes fade{from{transform:translateY(10px);opacity:.001}to{transform:none;opacity:1}}
+  }
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ext" viewBox="0 0 16 16"><path d="M6 3h7v7M13 3 4 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.49-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 16 16"><path fill="currentColor" d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85V1.15Zm4.94 12.24V6.17H2.54v7.22h2.4ZM3.74 5.18c.84 0 1.36-.55 1.36-1.25-.01-.71-.52-1.25-1.34-1.25S2.4 3.22 2.4 3.93c0 .7.52 1.25 1.33 1.25h.02Zm4.9 8.21V9.36c0-.22.02-.43.08-.59.18-.43.57-.88 1.23-.88.87 0 1.21.66 1.21 1.63v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.27 0-1.84.7-2.16 1.19v.03h-.02l.02-.03V6.17h-2.4c.03.68 0 7.22 0 7.22h2.4Z"/></symbol>
+  <symbol id="i-cf" viewBox="0 0 16 16"><path fill="currentColor" d="M1 6.5A1.5 1.5 0 0 1 2.5 5h1A1.5 1.5 0 0 1 5 6.5v6A1.5 1.5 0 0 1 3.5 14h-1A1.5 1.5 0 0 1 1 12.5v-6Zm5-4A1.5 1.5 0 0 1 7.5 1h1A1.5 1.5 0 0 1 10 2.5v10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-10Zm5 6A1.5 1.5 0 0 1 12.5 7h1A1.5 1.5 0 0 1 15 8.5v4a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-4Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 16 16"><path d="M2 3.5h12v9H2zM2.5 4l5.5 4.5L13.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Anurag E Prasad <span>· ML Engineer</span></a>
+    <div class="links" id="links">
+      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="avail fade"><i aria-hidden="true"></i>Open to ML, software engineering and data roles</span>
+    <h1 class="fade d1"><span class="silver">Anurag E Prasad</span></h1>
+    <p class="role fade d1">Machine Learning Engineer</p>
+    <p class="intro fade d2">I build machine learning and LLM systems that run in production: a real-time AI coaching engine, a generative-AI comics platform, computer vision on live video, and deep-learning forecasting for power grids, published in IEEE.</p>
+    <ul class="facts fade d3">
+      <li>Founding ML Engineer, Mentoroid</li>
+      <li>B.Tech, IIT Indore</li>
+      <li>BS Data Science, IIT Madras</li>
+    </ul>
+    <div class="actions fade d4">
+      <a class="btn primary" href="#experience">View experience</a>
+      <a class="btn" href="https://github.com/anurag2506" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/anurag-eshwar-prasad" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+      <a class="btn" href="#contact"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email</a>
+    </div>
+  </div>
+</header>
+
+
+<section id="experience">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">Experience</span>
+      <h2>Timeline</h2>
+      <p>Five roles across startups and research labs since 2024, most recent first.</p>
+    </div>
+
+    <ol class="timeline">
+      <li class="job now">
+        <div class="when"><span class="dates">Nov 2024 – Present</span><span class="where">Remote</span><span class="pill">Current</span></div>
+        <article class="card">
+          <div class="card-top">
+            <div><h3>Mentoroid</h3><p class="title">Founding Machine Learning Engineer</p></div>
+            <a class="site" href="https://mentoroid.ai" target="_blank" rel="noopener">mentoroid.ai <svg aria-hidden="true"><use href="#i-ext"/></svg></a>
+          </div>
+          <ul class="pts">
+            <li>Built the <b>AI coaching engine</b> for an in-game Dota 2 coach, pairing a rules engine that covers every playable hero with LLM reasoning for hero-specific advice.</li>
+            <li>Shipped <b>Goal Setting</b> end to end, letting players set and track custom goals, lifting <b>D7 retention by 45%</b>.</li>
+            <li>Cut in-game coaching latency from <b>12s to under 5s</b> by migrating inference to Anthropic Claude with prompt caching and streaming TTS.</li>
+            <li>Clustered <b>500 players</b> by hero pool and playstyle with hierarchical clustering to power "players like you" insights.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>Anthropic SDK</li><li>YOLO</li><li>GCP</li><li>Terraform</li></ul>
+        </article>
+      </li>
+
+      <li class="job">
+        <div class="when"><span class="dates">Feb 2026 – Jul 2026</span><span class="where">Remote</span></div>
+        <article class="card">
+          <div class="card-top">
+            <div><h3>Microdose</h3><p class="title">Software Engineer, Generative AI</p></div>
+            <a class="site" href="https://microdose.fun" target="_blank" rel="noopener">microdose.fun <svg aria-hidden="true"><use href="#i-ext"/></svg></a>
+          </div>
+          <ul class="pts">
+            <li>Found generations running unbilled and rebuilt billing as a <b>transactional credit ledger</b> (reserve before dispatch, settle at the executed model's price, refund on failure, idempotent via Redis), cutting unbilled spend <b>10×</b>.</li>
+            <li>Built an <b>LLM evaluation harness</b> of adversarial plots with a rubric and a judge model, correcting <b>56%</b> of mis-generated comic titles with zero regressions.</li>
+            <li>Benchmarked 3 image-generation models on cost, latency and quality and shipped the winner as default, lifting likes on generated comics <b>35%</b>.</li>
+            <li>Designed a weighted <b>trending ranker</b> that surfaces the next read when a comic ends, lifting per-comic retention <b>30%</b> in 15 days.</li>
+          </ul>
+          <ul class="tags"><li>FastAPI</li><li>Celery</li><li>Redis</li><li>Rust</li><li>React</li></ul>
+        </article>
+      </li>
+
+      <li class="job">
+        <div class="when"><span class="dates">Sep 2025 – Jan 2026</span><span class="where">On-site</span><span class="pill">IEEE publication</span></div>
+        <article class="card">
+          <div class="card-top">
+            <div><h3>IIT Indore</h3><p class="title">Machine Learning Research Intern</p></div>
+            <a class="site" href="https://www.iiti.ac.in" target="_blank" rel="noopener">iiti.ac.in <svg aria-hidden="true"><use href="#i-ext"/></svg></a>
+          </div>
+          <ul class="pts">
+            <li>Co-authored a <a href="https://ieeexplore.ieee.org/document/11503833" target="_blank" rel="noopener" style="color:var(--ink)">paper</a> in <b>IEEE Transactions on Industry Applications</b> (2026) on predicting PMU sensor readings when smart-grid data feeds are corrupted by cyber attacks.</li>
+            <li>Integrated window-based Reversible Instance Normalization into <b>TSMixer</b>, making the model viable on live streaming data.</li>
+            <li>Cut prediction error <b>~18×</b> versus the baseline on 45,000 field PMU samples; best on MAE, RMSE, sMAPE and MAPE among 8 models.</li>
+          </ul>
+          <ul class="tags"><li>PyTorch</li><li>Time series</li><li>TSMixer</li><li>RevIN</li></ul>
+        </article>
+      </li>
+
+      <li class="job">
+        <div class="when"><span class="dates">Aug 2024 – Aug 2025</span><span class="where">Remote</span></div>
+        <article class="card">
+          <div class="card-top">
+            <div><h3>UniQLabs.ai</h3><p class="title">Machine Learning &amp; Software Development Intern</p></div>
+            <a class="site" href="https://uniqlabs.ai" target="_blank" rel="noopener">uniqlabs.ai <svg aria-hidden="true"><use href="#i-ext"/></svg></a>
+          </div>
+          <ul class="pts">
+            <li>Built a <b>natural-language query tool</b> for any PostgreSQL database: inferred column meanings and table relations, then retrieved relevant schema with KNN cosine similarity to answer questions in plain English.</li>
+            <li>Delivered live <b>PPE-violation tracking</b> on CCTV streams at <b>0.34s latency</b> with RT-DETR detection, centroid tracking and a fine-tuned ResNet-50 classifier.</li>
+            <li>Built <b>AVAP</b>, a VC document-verification platform, end to end: React dashboards over PostgreSQL with row-level security, backed by AWS Lambda.</li>
+            <li>Shipped a WhatsApp market-insights bot and prototyped an in-browser AI website builder running generated code in WebContainers.</li>
+          </ul>
+          <ul class="tags"><li>RT-DETR</li><li>ResNet-50</li><li>PostgreSQL</li><li>AWS Lambda</li><li>React</li></ul>
+        </article>
+      </li>
+
+      <li class="job">
+        <div class="when"><span class="dates">Aug 2024 – Oct 2024</span><span class="where">On-site</span></div>
+        <article class="card">
+          <div class="card-top">
+            <div><h3>IITI DRISHTI CPS Foundation</h3><p class="title">Data Engineering &amp; ML Intern</p></div>
+          </div>
+          <ul class="pts">
+            <li>Raised Alzheimer's stage classification accuracy on MRI scans from <b>92% to 97%</b> by moving from ResNet to Capsule Networks, with SMOTE/ADASYN rebalancing on a manually annotated 4-class set.</li>
+          </ul>
+          <ul class="tags"><li>Capsule Networks</li><li>Medical imaging</li><li>PyTorch</li></ul>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">Research</span>
+      <h2>Publication</h2>
+    </div>
+    <div class="pub">
+      <article class="card">
+        <span class="pill">Accepted · 2026</span>
+        <h3 style="margin-top:14px">Modified TSMixer for synchrophasor prediction under cyber attacks</h3>
+        <p class="venue">IEEE Transactions on Industry Applications · Co-author</p>
+        <p class="abs">Power grids rely on PMU sensors to report their state many times a second. When an attacker floods or blocks those feeds, operators lose visibility. This work predicts the missing readings accurately enough to keep monitoring running, using a TSMixer model with window-based normalization so it works on live streams.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px"><a class="btn primary" href="https://ieeexplore.ieee.org/document/11503833" target="_blank" rel="noopener">Read the paper on IEEE Xplore <svg aria-hidden="true"><use href="#i-ext"/></svg></a></div>
+      </article>
+      <div class="metrics">
+        <div><strong>~18×</strong><span>lower error than TSMixer baseline</span></div>
+        <div><strong>27</strong><span>denial-of-service scenarios, 1–14 min</span></div>
+        <div><strong>&lt;1%</strong><span>percentage error across all attacks</span></div>
+        <div><strong>6 ms</strong><span>per prediction, 0.66 MB model</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">Projects</span>
+      <h2>Selected projects</h2>
+      <p>Personal and competition work across computer vision, LLMs and product analytics.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+      <button type="button" id="f-cv" data-f="cv" aria-pressed="false">Computer vision</button>
+      <button type="button" id="f-llm" data-f="llm" aria-pressed="false">LLMs &amp; RAG</button>
+      <button type="button" id="f-data" data-f="data" aria-pressed="false">Analytics</button>
+      <button type="button" id="f-ml" data-f="ml" aria-pressed="false">Machine learning</button>
+    </div>
+
+    <div class="grid" id="grid">
+      <article class="card proj" data-cat="llm cv">
+        <div class="meta"><span class="ctx">Inter IIT Tech Meet 2025 <span class="award">Bronze</span></span><span class="dates">Oct – Dec 2025</span></div>
+        <h3>VeQRA: Visual question answering for satellite imagery</h3>
+        <p class="desc">A geospatial app for captioning, visual grounding and question answering over uploaded satellite images, with spoken queries and responses.</p>
+        <p class="result">Fine-tuned <b>Qwen-7B</b> on SkySense, DIOR and DOTA, with YOLO11-OBB detections fed in as structured context.</p>
+        <ul class="tags"><li>Qwen-7B</li><li>YOLO11-OBB</li><li>Streaming TTS</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="data">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Aug – Sep 2026</span></div>
+        <h3>Hardwood: causal product analytics on a simulated NBA app</h3>
+        <p class="desc">Simulated 50,000 users over a real NBA season (2.75M events), then ran five analyses blind against planted ground truth.</p>
+        <p class="result">True effect inside the 95% CI on <b>all 11</b> graded quantities; Callaway–Sant'Anna recovered a staggered rollout that two-way fixed effects missed.</p>
+        <ul class="tags"><li>DuckDB</li><li>Diff-in-diff</li><li>A/B testing</li><li>LightGBM</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="data">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Jul 2026</span></div>
+        <h3>Dark Store Intelligence: quick-commerce analytics</h3>
+        <p class="desc">End-to-end analytics stack over a 30-store, 800-SKU network (1.69M orders): dimensional model, metrics layer, insight engine and decision engine.</p>
+        <p class="result">Surfaced <b>₹10.1 Cr</b> of annualised addressable margin, stable across 32 sensitivity sweeps.</p>
+        <ul class="tags"><li>DuckDB</li><li>SQL</li><li>Fixed effects</li><li>Experiment design</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="cv data">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Mar – Apr 2026</span></div>
+        <h3>Satellite-based port activity indicator</h3>
+        <p class="desc">Counted berthed and anchored ships at JNPT across 98 monthly satellite images (2018–2026) as a proxy for trade activity.</p>
+        <p class="result">Custom oriented-box NMS on <b>2,168 detections</b> revealed monsoon seasonality and post-COVID recovery.</p>
+        <ul class="tags"><li>YOLO11x-OBB</li><li>SAHI tiling</li><li>pandas</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="cv">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Jan 2026</span></div>
+        <h3>Steel surface defect detection</h3>
+        <p class="desc">Fine-tuned YOLOv11s on NEU-DET to localise 6 steel defect classes, with a CLI and Python API returning structured JSON per defect.</p>
+        <p class="result">mAP@50 of <b>0.62</b>, with documented class-confusion failure modes and fixes.</p>
+        <ul class="tags"><li>YOLOv11s</li><li>Python API</li><li>Quality inspection</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="llm">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Jun – Jul 2025</span></div>
+        <h3>Dota 2 hero counter recommendation engine</h3>
+        <p class="desc">RAG engine over a scraped corpus covering all 126 heroes: 598 matchup write-ups, 783 item recommendations and 348 guides.</p>
+        <p class="result">Answers checked with an <b>LLM-as-judge</b> loop and run at temperature 0 for reproducibility.</p>
+        <ul class="tags"><li>LangChain</li><li>FAISS</li><li>Embeddings</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="llm">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Mar – Apr 2025</span></div>
+        <h3>WhatsApp expense assistant</h3>
+        <p class="desc">Free-text messages like "spent 300 on coffee" become structured rows in PostgreSQL; questions are answered with generated SQL.</p>
+        <p class="result">Llama 3.2 intent routing plus <b>Llama 3.3 70B</b> text-to-SQL, served on FastAPI and Docker.</p>
+        <ul class="tags"><li>Twilio</li><li>Llama</li><li>PostgreSQL</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="ml">
+        <div class="meta"><span class="ctx">Inter IIT Tech Meet 2024</span><span class="dates">Nov – Dec 2024</span></div>
+        <h3>Dream11 fantasy team prediction</h3>
+        <p class="desc">Predicted fantasy points for all 22 players from 66 match and player features, benchmarking 5 regressor families.</p>
+        <p class="result">Scored models on the <b>fantasy points of their chosen XI</b> rather than raw error, with a chronological split to avoid look-ahead bias.</p>
+        <ul class="tags"><li>XGBoost</li><li>Random Forest</li><li>scikit-learn</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="ml">
+        <div class="meta"><span class="ctx">Personal</span><span class="dates">Jan – Feb 2025</span></div>
+        <h3>Personalised recipe recommender</h3>
+        <p class="desc">A weighted recipe-similarity graph scoring pairs on ingredients, prep time, cuisine and diet, with a recipe Q&amp;A assistant.</p>
+        <p class="result">Recommendations ranked by <b>graph traversal</b> against each user's stated preferences.</p>
+        <ul class="tags"><li>NetworkX</li><li>Cohere</li><li>Streamlit</li></ul>
+      </article>
+
+      <article class="card proj" data-cat="cv">
+        <div class="meta"><span class="ctx">IITI Summer of Code <span class="award">Gold</span></span><span class="dates">May – Jul 2024</span></div>
+        <h3>Image recolouring: grayscale to colour</h3>
+        <p class="desc">Colourised grayscale photos in LAB space, predicting chrominance from luminance so original brightness is preserved.</p>
+        <p class="result">Benchmarked CycleGAN, StyleGAN, Pix2Pix and DeOldify before choosing the <b>NoGAN</b> approach.</p>
+        <ul class="tags"><li>CNNs</li><li>GANs</li><li>COCO</li></ul>
+      </article>
+    </div>
+    <div class="more"><a class="btn" href="https://github.com/anurag2506" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>All code on GitHub</a></div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap split">
+    <div>
+      <span class="label">Achievements</span>
+      <h2>Recognition</h2>
+      <ul class="rows">
+        <li><div><div class="t"><a href="https://ieeexplore.ieee.org/document/11503833" target="_blank" rel="noopener" style="color:inherit">IEEE Transactions on Industry Applications ↗</a></div><div class="s">Publication · Modified TSMixer for synchrophasor prediction</div></div><span class="y">2026</span></li>
+        <li><div><div class="t">Bronze Medal, Inter IIT Tech Meet</div><div class="s">VeQRA, remote-sensing visual QA</div></div><span class="y">2025</span></li>
+        <li><div><div class="t">Gold Medal, IITI Summer of Code</div><div class="s">Image recolouring, Indore</div></div><span class="y">2024</span></li>
+        <li><div><div class="t">Finalist, Smart India Hackathon</div><div class="s">Grand finale, Hyderabad</div></div><span class="y">2024</span></li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Education</span>
+      <h2>Degrees</h2>
+      <ul class="rows">
+        <li><div><div class="t">B.Tech, Materials Science &amp; Engineering</div><div class="s">Indian Institute of Technology Indore</div></div><span class="y">2023 – 2027</span></li>
+        <li><div><div class="t">BS, Data Science &amp; Applications</div><div class="s">Indian Institute of Technology Madras</div></div><span class="y">2024 – 2028</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="head">
+      <span class="label">Skills</span>
+      <h2>Technical skills</h2>
+    </div>
+    <dl class="skills">
+      <dt>Languages</dt><dd><span>Python</span><span>C++</span><span>Java</span><span>JavaScript</span><span>SQL</span></dd>
+      <dt>AI / ML</dt><dd><span>PyTorch</span><span>Anthropic SDK</span><span>Tool use</span><span>Prompt caching</span><span>LLM evaluation</span><span>RAG</span><span>YOLO</span><span>scikit-learn</span><span>pandas</span><span>NumPy</span></dd>
+      <dt>Backend</dt><dd><span>FastAPI</span><span>Celery</span><span>Redis</span><span>REST</span><span>SSE streaming</span><span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span></dd>
+      <dt>Frontend</dt><dd><span>React</span><span>react-query</span><span>Streamlit</span><span>WebAssembly</span><span>WebContainers</span></dd>
+      <dt>Cloud &amp; DevOps</dt><dd><span>GCP Cloud Run</span><span>Cloud Functions</span><span>Pub/Sub</span><span>AWS Lambda</span><span>Terraform</span><span>Docker</span><span>Kubernetes</span><span>GitHub Actions</span></dd>
+      <dt>Experimentation</dt><dd><span>A/B testing</span><span>Power analysis &amp; MDE</span><span>CUPED</span><span>Difference-in-differences</span><span>Fixed effects</span><span>Hypothesis testing</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="label">Contact</span>
+    <h2 style="margin-top:10px"><span class="silver">Let's work together.</span></h2>
+    <p class="sub">I'm open to machine learning, software engineering and data roles. The fastest way to reach me is email.</p>
+    <div class="mailbox">
+      <span class="addr" id="addr">anurageprasad25@gmail.com</span>
+      <button class="btn primary" id="copy" type="button">Copy email</button>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    <div class="elsewhere">
+      <a class="btn" href="https://www.linkedin.com/in/anurag-eshwar-prasad" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+      <a class="btn" href="https://github.com/anurag2506" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
+      <a class="btn" href="https://codeforces.com/profile/anurag2506" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cf"/></svg>Codeforces</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Anurag E Prasad</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // project filters
+  const btns = document.querySelectorAll('.filters button');
+  const cards = document.querySelectorAll('#grid .proj');
+  btns.forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.f;
+    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    cards.forEach(c => { c.hidden = !(f === 'all' || c.dataset.cat.split(' ').includes(f)); });
+  }));
+
+  // active section in nav
+  const links = [...document.querySelectorAll('#links a')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          links.forEach(a => a.classList.remove('active'));
+          const a = map.get(e.target.id);
+          if (a){ a.classList.add('active'); a.scrollIntoView({block:'nearest', inline:'nearest'}); }
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    map.forEach((_, id) => { const s = document.getElementById(id); s && io.observe(s); });
+  }
+
+  // copy email
+  const btn = document.getElementById('copy'), addr = document.getElementById('addr'), note = document.getElementById('copied');
+  btn.addEventListener('click', () => {
+    const text = addr.textContent.trim();
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(addr); const s = getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent = 'Selected, press Ctrl+C'; };
+    try { navigator.clipboard.writeText(text).then(() => { note.textContent = 'Copied'; setTimeout(() => note.textContent = '', 2000); }, fallback); }
+    catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>
