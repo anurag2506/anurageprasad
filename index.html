@@ -42,11 +42,11 @@
   .silver{background:var(--silver-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
   /* nav */
-  .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(10,10,11,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(10,10,11,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transform:translateZ(0);will-change:transform;contain:layout paint}
   .nav .wrap{display:flex;align-items:center;gap:24px;min-height:var(--navh)}
   .brand{font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
   .brand span{color:var(--muted);font-weight:400}
-  .links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;overscroll-behavior-x:contain;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .links::-webkit-scrollbar{display:none}
   .links a{font-size:14.5px;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:6px;white-space:nowrap;transition:color .2s,background .2s}
   .links a:hover{color:var(--ink)}
@@ -57,13 +57,13 @@
   }
 
   /* hero */
-  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;contain:paint}
   .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
     background:
       radial-gradient(900px 420px at 85% -10%, rgba(210,212,218,.10), transparent 60%),
       linear-gradient(var(--line) 1px, transparent 1px) 0 0/100% 72px;
     -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,transparent 90%);
-    opacity:.55}
+    opacity:.55;transform:translateZ(0)}
   .hero .wrap{position:relative;padding-block:clamp(64px,10vw,120px) clamp(56px,8vw,88px)}
   .avail{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--silver);background:var(--surface)}
   .avail i{width:7px;height:7px;border-radius:50%;background:var(--silver);box-shadow:0 0 0 3px rgba(201,203,208,.18)}
@@ -81,6 +81,11 @@
 
   /* sections */
   section{padding-block:clamp(64px,9vw,104px);border-bottom:1px solid var(--line)}
+  /* hover effects only where a real pointer exists — they cause repaint churn on touch scrolling */
+  @media (hover:none){
+    .btn:hover,.site:hover,.card:hover{transform:none}
+    .rows li:hover{background:none}
+  }
   .head{display:flex;flex-direction:column;gap:10px;margin-bottom:clamp(32px,5vw,52px);max-width:62ch}
   .head h2{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.1}
   .head p{font-size:1.05rem}
@@ -524,20 +529,49 @@
   }));
 
   // active section in nav
-  const links = [...document.querySelectorAll('#links a')];
-  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-  if ('IntersectionObserver' in window){
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting){
-          links.forEach(a => a.classList.remove('active'));
-          const a = map.get(e.target.id);
-          if (a){ a.classList.add('active'); a.scrollIntoView({block:'nearest', inline:'nearest'}); }
-        }
-      });
-    }, {rootMargin:'-45% 0px -50% 0px'});
-    map.forEach((_, id) => { const s = document.getElementById(id); s && io.observe(s); });
+  const bar = document.getElementById('links');
+  const links = [...bar.querySelectorAll('a')];
+  const sections = links
+    .map(a => ({ a, el: document.getElementById(a.getAttribute('href').slice(1)) }))
+    .filter(x => x.el);
+
+  let current = null;
+  function setActive(a){
+    if (a === current) return;            // nothing changed: touch no DOM, cause no reflow
+    if (current) current.classList.remove('active');
+    current = a;
+    if (!a) return;
+    a.classList.add('active');
+    // Keep the chip in view by scrolling ONLY the nav strip sideways.
+    // (scrollIntoView would also scroll the page and fight the user.)
+    if (bar.scrollWidth > bar.clientWidth + 1){
+      const pad = 16;
+      const left = a.offsetLeft - pad;
+      const right = a.offsetLeft + a.offsetWidth + pad;
+      if (left < bar.scrollLeft) bar.scrollLeft = left;
+      else if (right > bar.scrollLeft + bar.clientWidth) bar.scrollLeft = right - bar.clientWidth;
+    }
   }
+
+  // One rAF-throttled read per scroll burst; no layout writes while scrolling.
+  let queued = false;
+  function update(){
+    queued = false;
+    const line = window.innerHeight * 0.35;   // the section crossing this line is "current"
+    let found = null;
+    for (const s of sections){
+      const r = s.el.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line){ found = s.a; break; }
+      if (r.top > line) break;
+      found = s.a;
+    }
+    if (window.scrollY < 40) found = null;    // at the very top, nothing is active
+    setActive(found);
+  }
+  function onScroll(){ if (!queued){ queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll, {passive:true});
+  update();
 
   // copy email
   const btn = document.getElementById('copy'), addr = document.getElementById('addr'), note = document.getElementById('copied');
